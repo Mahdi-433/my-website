@@ -1,5 +1,4 @@
-* { box-sizing: border-box; }
-
+/* ---- کارت و پروفایل ---- */
 body {
     margin: 0;
     height: 100vh;
@@ -7,6 +6,7 @@ body {
     font-family: sans-serif;
     color: #eee;
     overflow: hidden;
+    transition: background 0.8s ease;
 }
 
 canvas {
@@ -37,6 +37,7 @@ canvas {
     border-radius: 22px;
     padding: 35px;
     text-align: center;
+    transition: background 0.8s ease;
 }
 
 .avatar-box {
@@ -56,5 +57,23 @@ canvas {
     width: 60px;
     top: -10px;
     right: -5px;
-    transform: rotate(-20deg);
+    transform: rotate(15deg);
+}
+
+/* ---- Dropdown فصل ---- */
+#seasonDropdown {
+    margin-top: 25px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(45deg, #7bed9f, #4cd137);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    transition: 0.3s ease;
+}
+
+#seasonDropdown:hover {
+    transform: scale(1.05);
 }
