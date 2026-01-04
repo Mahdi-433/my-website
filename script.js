@@ -1,114 +1,135 @@
-/* ---------- Responsive Canvas ---------- */
-const canvas = document.getElementById("seasonCanvas");
-const ctx = canvas.getContext("2d");
-function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+const glow=document.querySelector(".mouse-glow");
+const card=document.querySelector(".card");
+const icon=document.getElementById("seasonIcon");
+const dropdown=document.querySelector(".dropdown");
+const btn=document.getElementById("dropdownBtn");
+const menu=document.getElementById("menu");
+
+function resize(){
+canvas.width=innerWidth;
+canvas.height=innerHeight;
 }
-window.addEventListener("resize", resize);
 resize();
+window.onresize=resize;
 
-/* ---------- Mouse Glow ---------- */
-const glow = document.querySelector(".mouse-glow");
-window.addEventListener("mousemove", e => {
-    glow.style.left = e.clientX + "px";
-    glow.style.top = e.clientY + "px";
+let mouse={x:0,y:0};
+window.addEventListener("mousemove",e=>{
+mouse.x=e.clientX;
+mouse.y=e.clientY;
+glow.style.left=mouse.x+"px";
+glow.style.top=mouse.y+"px";
 });
 
-/* ---------- Birthday Countdown ---------- */
-const daysEl = document.getElementById("days");
-const today = new Date();
-const birthday = new Date(today.getFullYear(), 4, 2);
-if (birthday < today) birthday.setFullYear(today.getFullYear() + 1);
-daysEl.textContent = Math.ceil((birthday - today)/(1000*60*60*24));
+btn.onclick=()=>dropdown.classList.toggle("open");
 
-/* ---------- Seasons & Icons ---------- */
-const icon = document.getElementById("seasonIcon");
-const body = document.body;
-const card = document.querySelector(".card");
-
-const seasons = ["winter","spring","summer","autumn"];
-let currentSeason = 0;
-
-const seasonIcons = {
-    "winter": "assets/santa-hat.png",
-    "spring": "assets/spring.png",
-    "summer": "assets/summer.png",
-    "autumn": "assets/autumn-leaf.png"
+menu.onclick=e=>{
+if(e.target.dataset.season){
+setSeason(e.target.dataset.season);
+dropdown.classList.remove("open");
+}
 };
 
-const seasonColors = {
-    "winter": ["#1c1f3a","#07070c","#fff"],
-    "spring": ["#a3f7bf","#7bed9f","#d0f4de"],
-    "summer": ["#ffe066","#feca57","#ffd32a"],
-    "autumn": ["#ff9f43","#ff6b6b","#f08a5d"]
+const seasons={
+winter:{
+bg:["#1c1f3a","#07070c"],
+text:"#fff",
+glow:"#9fb4ff",
+icon:"assets/santa-hat.png"
+},
+spring:{
+bg:["#fef6d8","#9be7c4"],
+text:"#1e3d2f",
+glow:"#4cffb0",
+icon:"assets/spring.png"
+},
+summer:{
+bg:["#ffb347","#ffcc33"],
+text:"#4a3b00",
+glow:"#ffd84c",
+icon:"assets/summer.png"
+},
+autumn:{
+bg:["#ff9f43","#ff6b6b"],
+text:"#3a1f0f",
+glow:"#ff944c",
+icon:"assets/autumn-leaf.png"
+}
 };
 
-function setSeason(season) {
-    currentSeason = seasons.indexOf(season);
-    icon.src = seasonIcons[season];
+let season="winter";
+let particles=[];
+let wind=0;
 
-    // تغییر رنگ پس زمینه و particles
-    const [bg1,bg2,particleColor] = seasonColors[season];
-    body.style.background = `radial-gradient(circle at center, ${bg1}, ${bg2})`;
-    card.style.background = `rgba(255,255,255,0.05)`;
-
-    particles.forEach(p => {
-        p.color = particleColor;
-        p.x = Math.random()*canvas.width;
-        p.y = Math.random()*canvas.height;
-    });
+function setSeason(s){
+season=s;
+const c=seasons[s];
+document.body.style.background=`radial-gradient(circle,${c.bg[0]},${c.bg[1]})`;
+card.style.color=c.text;
+btn.style.color=c.text;
+btn.style.borderColor=c.text;
+glow.style.background=c.glow;
+icon.src=c.icon;
+initParticles();
 }
 
-/* ---------- تعیین فصل اولیه بر اساس ماه ---------- */
-const month = today.getMonth();
-if(month<=1 || month===11) setSeason("winter");
-else if(month<=4) setSeason("spring");
-else if(month<=7) setSeason("summer");
-else setSeason("autumn");
-
-/* ---------- Dropdown ---------- */
-const dropdown = document.getElementById("seasonDropdown");
-dropdown.addEventListener("change", e => {
-    setSeason(e.target.value);
-});
-
-/* ---------- Particles ---------- */
-let particles = [];
+function initParticles(){
+particles=[];
 for(let i=0;i<120;i++){
-    particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        r: Math.random()*3+1,
-        vy: Math.random()*0.4+0.4,
-        color: seasonColors[seasons[currentSeason]][2]
-    });
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*3+1,
+vy:Math.random()*1+.5
+});
+}
 }
 
-/* ---------- Mouse Interaction ---------- */
-window.addEventListener("mousemove", e => {
-    particles.forEach(p=>{
-        const dx = p.x - e.clientX;
-        const dy = p.y - e.clientY;
-        const dist = Math.sqrt(dx*dx+dy*dy);
-        if(dist<120){
-            p.x += dx/dist*2;
-            p.y += dy/dist*2;
-        }
-    });
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+wind+=.002;
+
+particles.forEach(p=>{
+let dx=p.x-mouse.x;
+let dy=p.y-mouse.y;
+let d=Math.sqrt(dx*dx+dy*dy);
+if(d<120){
+p.x+=dx/d*1.2;
+p.y+=dy/d*1.2;
+}
+
+ctx.save();
+if(season==="winter"){
+ctx.fillStyle="#fff";
+ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+}
+if(season==="spring"){
+ctx.fillStyle="rgba(100,255,200,.9)";
+ctx.beginPath();ctx.arc(p.x,p.y,p.r+2,0,Math.PI*2);ctx.fill();
+}
+if(season==="summer"){
+ctx.fillStyle="rgba(255,220,100,.85)";
+ctx.beginPath();ctx.arc(p.x,p.y,p.r+3,0,Math.PI*2);ctx.fill();
+}
+if(season==="autumn"){
+ctx.fillStyle="#8b4513";
+ctx.translate(p.x,p.y);
+ctx.rotate(p.y*.01);
+ctx.fillRect(-p.r,-p.r,p.r*2,p.r);
+}
+ctx.restore();
+
+p.x+=Math.sin(wind)*.4;
+p.y+=p.vy;
+if(p.y>canvas.height){
+p.y=-10;
+p.x=Math.random()*canvas.width;
+}
 });
 
-/* ---------- Draw ---------- */
-function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-        p.y += p.vy;
-        if(p.y>canvas.height) p.y=-10;
-    });
-    requestAnimationFrame(draw);
+requestAnimationFrame(draw);
 }
+
+setSeason("winter");
 draw();
