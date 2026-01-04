@@ -1,37 +1,64 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>مهدی فرامرزی</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>مهدی فرامرزی</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<canvas id="seasonCanvas"></canvas>
+<canvas id="canvas"></canvas>
 <div class="mouse-glow"></div>
 
-<main class="card">
-    <div class="avatar-box">
-        <img class="avatar" src="https://via.placeholder.com/160/ffffff/ffffff">
-        <img class="season-icon" id="seasonIcon">
+<div class="card">
+  <div class="avatar-box">
+    <div class="avatar"></div>
+    <img id="seasonIcon" class="season-icon">
+  </div>
+
+  <h1>مهدی فرامرزی</h1>
+  <p class="subtitle">طراح و توسعه‌دهنده وب</p>
+
+  <div class="about">
+    من مهدی فرامرزی هستم، علاقه‌مند به طراحی و توسعه وب.
+    تمرکزم روی ساخت تجربه‌های مینیمال، انیمیشن‌های نرم
+    و تعاملات خلاقانه‌ست.
+  </div>
+
+  <div class="sections">
+    <div class="box">
+      <h3>علایق</h3>
+      <ul>
+        <li>UI Design</li>
+        <li>Animation</li>
+        <li>Front-End</li>
+        <li>Creative Coding</li>
+      </ul>
     </div>
 
-    <h1>مهدی فرامرزی</h1>
-    <p class="subtitle">متولد ۱۲ اردیبهشت ۱۳۸۷</p>
-
-    <div class="countdown">
-        <span id="days"></span> روز تا تولدم 🎂
+    <div class="box">
+      <h3>مهارت‌ها</h3>
+      <ul>
+        <li>HTML / CSS</li>
+        <li>JavaScript</li>
+        <li>UI / UX</li>
+        <li>Canvas & Motion</li>
+      </ul>
     </div>
+  </div>
+</div>
 
-    <!-- Dropdown فصل -->
-    <select id="seasonDropdown">
-        <option value="winter">زمستان ❄️</option>
-        <option value="spring">بهار 🌸</option>
-        <option value="summer">تابستان ☀️</option>
-        <option value="autumn">پاییز 🍂</option>
-    </select>
-</main>
+<div class="dropdown">
+  <button id="dropdownBtn">تغییر فصل</button>
+  <div class="dropdown-menu" id="menu">
+    <div data-season="winter">❄️ زمستان</div>
+    <div data-season="spring">🌸 بهار</div>
+    <div data-season="summer">☀️ تابستان</div>
+    <div data-season="autumn">🍂 پاییز</div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>
