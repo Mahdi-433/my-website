@@ -1,11 +1,9 @@
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
     height: 100vh;
-    background: radial-gradient(circle at top, #1b1f3b, #0a0a0f);
+    background: radial-gradient(circle at center, #1c1f3a, #07070c);
     font-family: sans-serif;
     color: #eee;
     overflow: hidden;
@@ -19,9 +17,9 @@ canvas {
 
 .mouse-glow {
     position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(100,150,255,0.15), transparent 60%);
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(120,160,255,0.18), transparent 65%);
     pointer-events: none;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -34,33 +32,29 @@ canvas {
     margin: auto;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 30px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(18px);
+    border-radius: 22px;
+    padding: 35px;
     text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.avatar-box {
+    position: relative;
+    display: inline-block;
 }
 
 .avatar {
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid rgba(255,255,255,0.3);
+    background: white;
 }
 
-.subtitle {
-    color: #9aa4ff;
-}
-
-.info p {
-    margin: 6px 0;
-    font-size: 0.95rem;
-}
-
-.countdown {
-    margin-top: 20px;
-    font-size: 1.1rem;
-    color: #ffd479;
+.season-icon {
+    position: absolute;
+    width: 60px;
+    top: -10px;
+    right: -5px;
+    transform: rotate(-20deg);
 }
