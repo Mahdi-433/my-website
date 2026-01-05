@@ -28,6 +28,24 @@ z-index:1;
 transform:translate(-50%,-50%);
 }
 
+/* لوگو */
+.logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.6);
+  transition: color 0.5s, transform 0.3s;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.logo:hover {
+  transform: scale(1.1) rotate(-5deg);
+}
+
 .card{
 position:fixed;
 top:50%;
@@ -105,6 +123,7 @@ margin-bottom:4px;
 opacity:.9;
 }
 
+/* دکمه تغییر فصل */
 .dropdown{
 position:fixed;
 left:20px;
@@ -116,9 +135,15 @@ z-index:10;
 padding:12px 22px;
 border-radius:16px;
 border:1px solid rgba(255,255,255,.35);
-background:rgba(255,255,255,.18);
+background: rgba(255,255,255,.18);
+box-shadow: 0 6px 12px rgba(0,0,0,0.15);
 cursor:pointer;
-transition:.3s;
+transition: transform 0.3s, background 0.3s;
+}
+
+#dropdownBtn:hover{
+transform: scale(1.05);
+background: rgba(255,255,255,.25);
 }
 
 .dropdown-menu{
@@ -152,39 +177,46 @@ transition:.3s;
 background:rgba(255,255,255,.35);
 }
 
-/* موبایل کوچک */
+/* واکنش‌گرایی موبایل */
 @media (max-width: 480px) {
   .card {
     width: 90%;        /* عرض کمتر */
-    padding: 30px 20px; /* ارتفاع بیشتر با padding عمودی */
-    border-radius: 20px;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    padding: 30px 20px; /* کارت کشیده‌تر */
+    border-radius:20px;
+    font-size:0.95rem;
+    line-height:1.6;
   }
 
   .sections {
-    flex-direction: column; /* بخش‌ها زیر هم قرار بگیرن */
-    gap: 14px;
+    flex-direction: column;
+    gap:14px;
   }
 
   .avatar {
-    width: 100px;
-    height: 100px;
+    width:100px;
+    height:100px;
   }
 
   .season-icon {
-    width: 40px;
-    top: -6px;
-    right: -6px;
+    width:40px;
+    top:-6px;
+    right:-6px;
+  }
+
+  /* دکمه تغییر فصل روی موبایل پایین سمت راست */
+  .dropdown {
+    left:auto;
+    right:20px;
+    bottom:20px;
   }
 
   #dropdownBtn {
-    padding: 14px 20px;
-    font-size: 1.1rem;
+    padding:14px 20px;
+    font-size:1.1rem;
   }
 
   .dropdown-menu div {
-    padding: 10px 16px;
-    font-size: 0.9rem;
+    padding:10px 16px;
+    font-size:0.9rem;
   }
 }

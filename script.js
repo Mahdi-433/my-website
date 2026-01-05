@@ -35,30 +35,10 @@ menu.onclick = e => {
 
 // Seasons config
 const seasons = {
-    winter: {
-        bg: ["#1c1f3a","#07070c"],
-        text: "#fff",
-        glow: "#9fb4ff",
-        icon: "assets/santa-hat.png"
-    },
-    spring: {
-        bg: ["#fef6d8","#9be7c4"],
-        text: "#1e3d2f",
-        glow: "#4cffb0",
-        icon: "assets/spring.png"
-    },
-    summer: {
-        bg: ["#ffb347","#ffcc33"],
-        text: "#4a3b00",
-        glow: "#ffd84c",
-        icon: "assets/summer.png"
-    },
-    autumn: {
-        bg: ["#ff9f43","#ff6b6b"],
-        text: "#3a1f0f",
-        glow: "#ff944c",
-        icon: "assets/autumn-leaf.png"
-    }
+    winter: { bg: ["#1c1f3a","#07070c"], text: "#fff", glow: "#9fb4ff", icon: "assets/santa-hat.png" },
+    spring: { bg: ["#fef6d8","#9be7c4"], text: "#1e3d2f", glow: "#4cffb0", icon: "assets/spring.png" },
+    summer: { bg: ["#ffb347","#ffcc33"], text: "#4a3b00", glow: "#ffd84c", icon: "assets/summer.png" },
+    autumn: { bg: ["#ff9f43","#ff6b6b"], text: "#3a1f0f", glow: "#ff944c", icon: "assets/autumn-leaf.png" }
 };
 
 let season = "winter";
@@ -74,6 +54,10 @@ function setSeason(s) {
     btn.style.borderColor = c.text;
     glow.style.background = c.glow;
     icon.src = c.icon;
+
+    // لوگو رنگش با فصل تغییر کنه
+    document.querySelector(".logo").style.color = c.text;
+
     initParticles();
 }
 
@@ -95,7 +79,7 @@ function draw(){
     wind += 0.002;
 
     particles.forEach(p=>{
-        // Interaction with mouse
+        // واکنش ذرات با ماوس
         let dx = p.x - mouse.x;
         let dy = p.y - mouse.y;
         let d = Math.sqrt(dx*dx + dy*dy);
@@ -131,7 +115,7 @@ function draw(){
         }
         ctx.restore();
 
-        // Move particles
+        // حرکت ذرات
         p.x += Math.sin(wind)*0.4;
         p.y += p.vy;
         if(p.y>canvas.height){
@@ -143,5 +127,6 @@ function draw(){
     requestAnimationFrame(draw);
 }
 
+// شروع سایت با زمستان
 setSeason("winter");
 draw();
