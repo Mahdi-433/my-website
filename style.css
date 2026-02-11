@@ -1,222 +1,99 @@
-html,body{
-margin:0;
-width:100%;
-height:100%;
-overflow:hidden;
-font-family:sans-serif;
+html { width:100%; height:100%; }
+body {
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:sans-serif;
+  transition:background .8s ease;
 }
 
-body{
-transition:background .8s ease;
-}
+canvas { position:fixed; inset:0; z-index:0; }
+.mouse-glow { position:fixed; width:300px; height:300px; border-radius:50%; filter:blur(50px); opacity:.35; pointer-events:none; z-index:1; transform:translate(-50%,-50%); }
 
-canvas{
-position:fixed;
-inset:0;
-z-index:0;
-}
-
-.mouse-glow{
-position:fixed;
-width:300px;
-height:300px;
-border-radius:50%;
-filter:blur(50px);
-opacity:.35;
-pointer-events:none;
-z-index:1;
-transform:translate(-50%,-50%);
-}
-
-/* لوگو */
 .logo {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255,255,255,0.6);
+  position:fixed;
+  top:20px; left:20px;
+  font-size:28px;
+  font-weight:bold;
+  color:#fff;
+  text-shadow:0 0 10px rgba(255,255,255,.6);
   transition: color 0.5s, transform 0.3s;
-  cursor: pointer;
-  z-index: 5;
+  cursor:pointer;
+  z-index:5;
+}
+.logo:hover { transform: scale(1.1) rotate(-5deg); }
+
+.card {
+  position:fixed;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:560px;
+  padding:30px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(22px);
+  border-radius:28px;
+  text-align:center;
+  z-index:2;
+  transition:color .6s;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
-.logo:hover {
-  transform: scale(1.1) rotate(-5deg);
-}
+.avatar-box{ position:relative; display:inline-block; }
+.avatar{ width:120px; height:120px; border-radius:50%; background:#fff; margin-bottom:10px; }
+.season-icon{ position:absolute; width:50px; top:-8px; right:-8px; transform:rotate(18deg); }
 
-.card{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:560px;
-padding:30px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(22px);
-border-radius:28px;
-text-align:center;
-z-index:2;
-transition:color .6s;
-}
+.subtitle{ margin:4px 0 10px; opacity:.85; }
+.about{ font-size:.95rem; line-height:1.7; margin-bottom:14px; }
 
-.avatar-box{
-position:relative;
-display:inline-block;
-}
+.sections{ display:flex; gap:16px; }
+.box{ flex:1; background:rgba(255,255,255,.08); border-radius:16px; padding:12px; backdrop-filter:blur(12px); }
+.box h3{ margin:0 0 8px; font-size:1rem; }
+.box ul{ list-style:none; padding:0; margin:0; }
+.box li{ font-size:.85rem; margin-bottom:4px; opacity:.9; }
 
-.avatar{
-width:120px;
-height:120px;
-border-radius:50%;
-background:#fff;
-margin-bottom:10px;
-}
-
-.season-icon{
-position:absolute;
-width:50px;
-top:-8px;
-right:-8px;
-transform:rotate(18deg);
-}
-
-.subtitle{
-margin:4px 0 10px;
-opacity:.85;
-}
-
-.about{
-font-size:.95rem;
-line-height:1.7;
-margin-bottom:14px;
-}
-
-.sections{
-display:flex;
-gap:16px;
-}
-
-.box{
-flex:1;
-background:rgba(255,255,255,.08);
-border-radius:16px;
-padding:12px;
-backdrop-filter:blur(12px);
-}
-
-.box h3{
-margin:0 0 8px;
-font-size:1rem;
-}
-
-.box ul{
-list-style:none;
-padding:0;
-margin:0;
-}
-
-.box li{
-font-size:.85rem;
-margin-bottom:4px;
-opacity:.9;
-}
-
-/* دکمه تغییر فصل */
-.dropdown{
-position:fixed;
-left:20px;
-bottom:20px;
-z-index:10;
-}
-
+.dropdown{ position:fixed; left:20px; bottom:20px; z-index:10; }
 #dropdownBtn{
-padding:12px 22px;
-border-radius:16px;
-border:1px solid rgba(255,255,255,.35);
-background: rgba(255,255,255,.18);
-box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-cursor:pointer;
-transition: transform 0.3s, background 0.3s;
+  padding:12px 22px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.35);
+  background: rgba(255,255,255,.18);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  cursor:pointer;
+  transition: transform 0.3s, background 0.3s;
 }
-
-#dropdownBtn:hover{
-transform: scale(1.05);
-background: rgba(255,255,255,.25);
-}
+#dropdownBtn:hover{ transform: scale(1.05); background: rgba(255,255,255,.25); }
 
 .dropdown-menu{
-position:absolute;
-bottom:60px;
-left:0;
-min-width:200px;
-background:rgba(255,255,255,.18);
-backdrop-filter:blur(18px);
-border-radius:18px;
-overflow:hidden;
-opacity:0;
-transform:scale(.9);
-pointer-events:none;
-transition:.35s;
+  position:absolute; bottom:60px; left:0;
+  min-width:200px;
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(18px);
+  border-radius:18px;
+  overflow:hidden;
+  opacity:0;
+  transform:scale(.9);
+  pointer-events:none;
+  transition:.35s;
 }
-
 .dropdown.open .dropdown-menu{
-opacity:1;
-transform:scale(1);
-pointer-events:auto;
+  opacity:1;
+  transform:scale(1);
+  pointer-events:auto;
 }
-
 .dropdown-menu div{
-padding:14px 26px;
-cursor:pointer;
-transition:.3s;
+  padding:14px 26px;
+  cursor:pointer;
+  transition:.3s;
 }
+.dropdown-menu div:hover{ background:rgba(255,255,255,.35); }
 
-.dropdown-menu div:hover{
-background:rgba(255,255,255,.35);
-}
-
-/* واکنش‌گرایی موبایل */
-@media (max-width: 480px) {
-  .card {
-    width: 90%;        /* عرض کمتر */
-    padding: 30px 20px; /* کارت کشیده‌تر */
-    border-radius:20px;
-    font-size:0.95rem;
-    line-height:1.6;
-  }
-
-  .sections {
-    flex-direction: column;
-    gap:14px;
-  }
-
-  .avatar {
-    width:100px;
-    height:100px;
-  }
-
-  .season-icon {
-    width:40px;
-    top:-6px;
-    right:-6px;
-  }
-
-  /* دکمه تغییر فصل روی موبایل پایین سمت راست */
-  .dropdown {
-    left:auto;
-    right:20px;
-    bottom:20px;
-  }
-
-  #dropdownBtn {
-    padding:14px 20px;
-    font-size:1.1rem;
-  }
-
-  .dropdown-menu div {
-    padding:10px 16px;
-    font-size:0.9rem;
-  }
+@media (max-width:480px){
+  .card { width:90%; padding:30px 20px; border-radius:20px; font-size:0.95rem; line-height:1.6; }
+  .sections { flex-direction:column; gap:14px; }
+  .avatar{ width:100px; height:100px; }
+  .season-icon{ width:40px; top:-6px; right:-6px; }
+  .dropdown{ left:auto; right:20px; bottom:20px; }
+  #dropdownBtn{ padding:14px 20px; font-size:1.1rem; }
+  .dropdown-menu div{ padding:10px 16px; font-size:0.9rem; }
 }
