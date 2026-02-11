@@ -10,6 +10,7 @@ const menu = document.getElementById("menu");
 
 const isTouch = 'ontouchstart' in window;
 
+// تنظیم اندازه canvas
 function resize() {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
@@ -17,8 +18,8 @@ function resize() {
 resize();
 window.addEventListener("resize", resize);
 
-// Mouse
-let mouse = { x: innerWidth / 2, y: innerHeight / 2 };
+// موس
+let mouse = { x: innerWidth/2, y: innerHeight/2 };
 if (!isTouch) {
   window.addEventListener("mousemove", e => {
     mouse.x = e.clientX;
@@ -39,7 +40,7 @@ menu.onclick = e => {
   }
 };
 
-// Seasons
+// فصل‌ها
 const seasons = {
   winter: { bg:["#1c1f3a","#07070c"], text:"#fff", glow:"#9fb4ff", icon:"assets/santa-hat.png" },
   spring: { bg:["#fef6d8","#9be7c4"], text:"#1e3d2f", glow:"#4cffb0", icon:"assets/spring.png" },
@@ -81,19 +82,19 @@ const drawParticle = {
   winter(p) {
     ctx.fillStyle = "#fff";
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
     ctx.fill();
   },
   spring(p) {
     ctx.fillStyle = "rgba(100,255,200,.9)";
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r + 2, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, p.r+2, 0, Math.PI*2);
     ctx.fill();
   },
   summer(p) {
     ctx.fillStyle = "rgba(255,220,100,.85)";
     ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r + 3, 0, Math.PI * 2);
+    ctx.arc(p.x, p.y, p.r+3, 0, Math.PI*2);
     ctx.fill();
   },
   autumn(p) {
@@ -101,37 +102,36 @@ const drawParticle = {
     ctx.save();
     ctx.translate(p.x, p.y);
     ctx.rotate((p.y % 50) * 0.01);
-    ctx.fillRect(-p.r, -p.r, p.r * 2, p.r);
+    ctx.fillRect(-p.r,-p.r,p.r*2,p.r);
     ctx.restore();
   }
 };
 
 function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
   particles.forEach(p => {
-    if (!isTouch) {
+    if(!isTouch){
       const dx = p.x - mouse.x;
       const dy = p.y - mouse.y;
       const d = Math.hypot(dx, dy);
-      if (d < 120) {
-        p.x += dx / d;
-        p.y += dy / d;
+      if(d < 120){
+        p.x += dx/d;
+        p.y += dy/d;
       }
     }
 
     drawParticle[season](p);
-
     p.y += p.vy;
-    if (p.y > canvas.height) {
+    if(p.y > canvas.height){
       p.y = -10;
-      p.x = Math.random() * canvas.width;
+      p.x = Math.random()*canvas.width;
     }
   });
 
   requestAnimationFrame(animate);
 }
 
-// Start
+// شروع با زمستان
 setSeason("winter");
 animate();
