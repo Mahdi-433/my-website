@@ -1,70 +1,60 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-<meta charset="UTF-8">
-<title>مهدی فرامرزی</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="assets/mf-logo.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مهدی فرامرزی - وب‌سایت شخصی</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <canvas id="canvas"></canvas>
+  <div class="mouse-glow"></div>
 
-<canvas id="canvas"></canvas>
-<div class="mouse-glow"></div>
+  <div class="logo">Mahdi</div>
 
-<!-- لوگوی جذاب -->
-<div class="logo">MF</div>
-
-<div class="card">
-  <div class="avatar-box">
-    <div class="avatar"></div>
-    <img id="seasonIcon" class="season-icon">
-  </div>
-
-  <h1>مهدی فرامرزی</h1>
-  <p class="subtitle">طراح و توسعه‌دهنده وب</p>
-
-  <div class="about">
-    من مهدی فرامرزی هستم، علاقه‌مند به طراحی و توسعه وب.
-    تمرکزم روی ساخت تجربه‌های مینیمال، انیمیشن‌های نرم
-    و تعاملات خلاقانه‌ست.
-  </div>
-
-  <div class="sections">
-    <div class="box">
-      <h3>علایق</h3>
-      <ul>
-        <li>UI Design</li>
-        <li>Animation</li>
-        <li>Front-End</li>
-        <li>Creative Coding</li>
-      </ul>
+  <div class="card">
+    <div class="avatar-box">
+      <div class="avatar"></div>
+      <img id="seasonIcon" class="season-icon" src="assets/santa-hat.png" alt="فصل">
     </div>
+    <h2>مهدی فرامرزی</h2>
+    <h3 class="subtitle">طراح و توسعه‌دهنده وب</h3>
+    <p class="about">
+      من مهدی فرامرزی هستم، علاقه‌مند به طراحی و توسعه وب. تمرکزم روی ساخت تجربه‌های مینیمال، انیمیشن‌های نرم و تعاملات خلاقانه است.
+    </p>
 
-    <div class="box">
-      <h3>مهارت‌ها</h3>
-      <ul>
-        <li>HTML / CSS</li>
-        <li>JavaScript</li>
-        <li>UI / UX</li>
-        <li>Canvas & Motion</li>
-      </ul>
+    <div class="sections">
+      <div class="box">
+        <h3>علایق</h3>
+        <ul>
+          <li>UI Design</li>
+          <li>Animation</li>
+          <li>Front-End</li>
+          <li>Creative Coding</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>مهارت‌ها</h3>
+        <ul>
+          <li>HTML / CSS</li>
+          <li>JavaScript</li>
+          <li>UI / UX</li>
+          <li>Canvas & Motion</li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- دکمه تغییر فصل -->
-<div class="dropdown">
-  <button id="dropdownBtn">تغییر فصل</button>
-  <div class="dropdown-menu" id="menu">
-    <div data-season="winter">❄️ زمستان</div>
-    <div data-season="spring">🌸 بهار</div>
-    <div data-season="summer">☀️ تابستان</div>
-    <div data-season="autumn">🍂 پاییز</div>
+  <div class="dropdown">
+    <button id="dropdownBtn">تغییر فصل</button>
+    <div id="menu" class="dropdown-menu">
+      <div data-season="winter">❄️ زمستان</div>
+      <div data-season="spring">🌸 بهار</div>
+      <div data-season="summer">☀️ تابستان</div>
+      <div data-season="autumn">🍁 پاییز</div>
+    </div>
   </div>
-</div>
 
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
